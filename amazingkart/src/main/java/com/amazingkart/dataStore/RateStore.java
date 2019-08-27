@@ -3,6 +3,10 @@ package com.amazingkart.dataStore;
 import java.util.HashMap;
 import java.util.Map;
 
+/* *
+ * @RateStore is the class which stores currency rates
+ * details fetched from web api
+ * */
 public class RateStore {
 
 	private static RateStore excahgenRateStore = new RateStore();

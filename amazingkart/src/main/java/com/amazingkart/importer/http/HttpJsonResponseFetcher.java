@@ -19,12 +19,5 @@ public class HttpJsonResponseFetcher<T> {
 		return new JSONConverter<Product>().convertJsonToObject(HttpClient.fetchResponse(productDetailsUrl), type);
 	}
 	
-	/*public Map fetchJSONResponseIntoMap(String url) throws AmazingKartException {
-		return (Map) new JSONConverter<T>().convertJsonToObject(HttpClient.fetchResponse(url));
-	}
-	*/
-	
-	
-	
 	
 }

@@ -5,6 +5,7 @@ import com.amazingkart.promotions.DiscountRule.DISCOUNT_TYPE;
 
 public class PromotionB extends PromotionSet {
 
+	/*List of promotion rules for set B*/
 	DiscountRule[] rules = {
 			new DiscountRule(DISCOUNT_TYPE.PERCENTAGE, 12.0, "get 12% off", CONDITION_GROUP_LOGIC_OPERATOR.OR,
 					new Condition[] { new Condition("inventory", Condition.COMPARISON_OPERATOR.GREATER_THAN,

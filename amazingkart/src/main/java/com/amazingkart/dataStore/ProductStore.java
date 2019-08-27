@@ -6,6 +6,10 @@ import java.util.List;
 import com.amazingkart.pojo.Product;
 import com.amazingkart.util.CurrencyConverter;
 
+/* *
+ * @ProductStore is the class which stores product
+ * details fetched from web api
+ * */
 public class ProductStore {
 
 	private static ProductStore productStore = new ProductStore();

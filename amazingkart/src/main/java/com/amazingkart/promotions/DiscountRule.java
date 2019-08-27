@@ -4,6 +4,9 @@ import com.amazingkart.AmazingKartException;
 import com.amazingkart.pojo.Discount;
 import com.amazingkart.pojo.Product;
 
+/*DiscountRule object corresponds to the discount condition 
+ * and amount/ percentage of discount 
+ * that can be applied on product*/
 public class DiscountRule {
 
 	enum DISCOUNT_TYPE {
@@ -21,7 +24,8 @@ public class DiscountRule {
 	private CONDITION_GROUP_LOGIC_OPERATOR operator;
 	private CONDITION_GROUP_LOGIC_OPERATOR group_LOGIC_OPERATOR;
 
-	public DiscountRule(DISCOUNT_TYPE discount_type, Double discount, String discountTag, CONDITION_GROUP_LOGIC_OPERATOR group_LOGIC_OPERATOR, Condition []condition) {
+	public DiscountRule(DISCOUNT_TYPE discount_type, Double discount, String discountTag,
+			CONDITION_GROUP_LOGIC_OPERATOR group_LOGIC_OPERATOR, Condition[] condition) {
 		super();
 		this.discount_type = discount_type;
 		this.discount = discount;
@@ -30,7 +34,6 @@ public class DiscountRule {
 		this.group_LOGIC_OPERATOR = group_LOGIC_OPERATOR;
 	}
 
-
 	private double applyDiscount(Double amount) {
 		if (DISCOUNT_TYPE.PERCENTAGE.equals(discount_type)) {
 			return amount * (discount / 100);
@@ -38,13 +41,17 @@ public class DiscountRule {
 			return discount;
 		}
 	}
-	
+
+	/*
+	 * This method applies the discount rule on product and returns the amount of
+	 * discount that can be applied
+	 */
 	public Discount applyDiscountRule(Product product) throws AmazingKartException {
 		Discount discount = new Discount(0.0, "");
 		boolean ruleResult = CONDITION_GROUP_LOGIC_OPERATOR.AND.equals(this.operator) ? true : false;
 
 		if (conditions.length > 0) {
-			for (Condition condition: conditions) {
+			for (Condition condition : conditions) {
 				boolean runCondition = condition.runCondition(product);
 				ruleResult = CONDITION_GROUP_LOGIC_OPERATOR.AND.equals(this.operator) ? runCondition && ruleResult
 						: ruleResult || runCondition;
@@ -59,8 +66,7 @@ public class DiscountRule {
 
 		return discount;
 	}
-	
-	
+
 	public DISCOUNT_TYPE getDiscount_type() {
 		return discount_type;
 	}
@@ -85,7 +91,6 @@ public class DiscountRule {
 		this.discountTag = discountTag;
 	}
 
-
 	public CONDITION_GROUP_LOGIC_OPERATOR getOperator() {
 		return operator;
 	}
@@ -109,7 +114,5 @@ public class DiscountRule {
 	public void setGroup_LOGIC_OPERATOR(CONDITION_GROUP_LOGIC_OPERATOR group_LOGIC_OPERATOR) {
 		this.group_LOGIC_OPERATOR = group_LOGIC_OPERATOR;
 	}
-
-
 
 }
