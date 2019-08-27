@@ -22,11 +22,14 @@ public class ProductStore {
 
 	public void addAll(List<Product> products) {
 
+		
 		for (Product product : products) {
+			Product p = new Product(product);
 			if (!product.getCurrency().equals("INR")) {
-				product.setPrice(CurrencyConverter.convert(product.getCurrency(), "INR", product.getPrice()));
+				p.setPrice(CurrencyConverter.convert(p.getCurrency(), "INR", p.getPrice()));
+				p.setCurrency("INR");
 			}
-			products.add(product);
+			this.products.add(p);
 		}
 	}
 

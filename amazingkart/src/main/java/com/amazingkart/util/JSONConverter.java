@@ -12,11 +12,14 @@ import com.google.gson.reflect.TypeToken;
 
 public class JSONConverter<T> {
 
-	public List<T> convertJsonToObject(String jsonString) {
-		Type listType = new TypeToken<ArrayList<T>>() {
-		}.getType();
+	public T convertJsonToObject(String jsonString, Class<T> class1) {
 		Gson gson = new Gson();
-		return gson.fromJson(jsonString, listType);
+		return gson.fromJson(jsonString, class1);
+	}
+	
+	public List<T> convertJsonToObject(String jsonString, Type type) {
+		Gson gson = new Gson();
+		return gson.fromJson(jsonString, type);
 	}
 	
 	public T convertJsonToObjectMap(String jsonString) {
@@ -47,5 +50,7 @@ public class JSONConverter<T> {
 			}
 		}
 	}
+
+
 
 }

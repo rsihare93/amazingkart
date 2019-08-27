@@ -39,6 +39,10 @@ public class Product {
 		this.arrival = product.arrival;
 	}
 
+	public Product() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getCategory() {
 		return category;
 	}
@@ -103,4 +107,14 @@ public class Product {
 		this.discount = discount;
 	}
 
+	public String getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(String arrival) {
+		this.arrival = arrival;
+	}
+
+	
+	
 }

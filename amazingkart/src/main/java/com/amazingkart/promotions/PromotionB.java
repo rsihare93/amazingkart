@@ -1,35 +1,19 @@
 package com.amazingkart.promotions;
 
-import com.amazingkart.AmazingKartException;
-import com.amazingkart.pojo.Discount;
-import com.amazingkart.pojo.Product;
-import com.amazingkart.promotions.Rule.CONDITIONS;
-import com.amazingkart.promotions.Rule.DISCOUNT_TYPE;
+import com.amazingkart.promotions.DiscountRule.CONDITION_GROUP_LOGIC_OPERATOR;
+import com.amazingkart.promotions.DiscountRule.DISCOUNT_TYPE;
 
-public class PromotionB extends PromotionSet{
-	@Override
-	public void applyPromotion(Product product) throws AmazingKartException {
+public class PromotionB extends PromotionSet {
 
-		Rule[] rules = {
-				new Rule(DISCOUNT_TYPE.PERCENTAGE, 12.0, CONDITIONS.GREATER_THAN, new Integer[] { 20 }, "inventory",
-						"7% discounted"),
-				new Rule(DISCOUNT_TYPE.PERCENTAGE, 7.0, CONDITIONS.EQUAL, new String[] { "NEW" }, "arrival",
-						"4% discounted"),
-				};
+	DiscountRule[] rules = {
+			new DiscountRule(DISCOUNT_TYPE.PERCENTAGE, 12.0, "get 12% off", CONDITION_GROUP_LOGIC_OPERATOR.OR,
+					new Condition[] { new Condition("inventory", Condition.COMPARISON_OPERATOR.GREATER_THAN,
+							new Integer[] { 20 }) }),
+			new DiscountRule(DISCOUNT_TYPE.PERCENTAGE, 7.0, "get 7% off", CONDITION_GROUP_LOGIC_OPERATOR.OR,
+					new Condition[] {
+							new Condition("arrival", Condition.COMPARISON_OPERATOR.EQUAL, new String[] { "NEW" }) }) };
 
-		int maxDisc = 0;
-		Discount maxDiscount = null;
-
-		for (Rule r : rules) {
-			Discount temp = r.applyRule(product);
-			maxDiscount = maxDisc < temp.getAmount() ? temp : maxDiscount;
-		}
-
-		if (maxDiscount != null && maxDiscount.getAmount() > 0) {
-			product.setDiscount(maxDiscount);
-			return;
-		}
-
-		super.applyPromotion(product);
+	protected DiscountRule[] getDiscountRules() {
+		return rules;
 	}
 }
