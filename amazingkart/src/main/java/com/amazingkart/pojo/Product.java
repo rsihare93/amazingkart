@@ -10,9 +10,10 @@ public class Product {
 	String origin;
 	String product;
 	Discount discount;
+	String arrival;
 
 	public Product(String category, Integer inventory, Double rating, String currency, Double price, String origin,
-			String product, Discount discount) {
+			String product, Discount discount, String arrival) {
 		super();
 		this.category = category;
 		this.inventory = inventory;
@@ -22,6 +23,20 @@ public class Product {
 		this.origin = origin;
 		this.product = product;
 		this.discount = discount;
+		this.arrival = arrival;
+	}
+
+	public Product(Product product) {
+		super();
+		this.category = product.category;
+		this.inventory = product.inventory;
+		this.rating = product.rating;
+		this.currency = product.currency;
+		this.price = product.price;
+		this.origin = product.origin;
+		this.product = product.product;
+		this.discount = product.discount;
+		this.arrival = product.arrival;
 	}
 
 	public String getCategory() {
@@ -89,4 +104,3 @@ public class Product {
 	}
 
 }
-

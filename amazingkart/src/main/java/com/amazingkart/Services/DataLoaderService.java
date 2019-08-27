@@ -10,14 +10,26 @@ import com.amazingkart.pojo.Product;
 
 public class DataLoaderService {
 
-	public void fetchProductDetails() throws AmazingKartException {
+	
+	
+	private DataLoaderService() {
+		
+	}
+	
+	private static DataLoaderService dataLoaderService =  new DataLoaderService();
+	
+	public static DataLoaderService getInstance() {
+		return dataLoaderService;
+	}
+	
+	public void loadProductDetails() throws AmazingKartException {
 		ProductStore.getInstance()
 		.addAll(new HttpJsonResponseFetcher<Product>().fetchJSONResponse(Constants.PRODUCT_DETAILS_URL));
 	}
 
-	public void fetchExchangeRates() throws AmazingKartException {
+	public void loadExchangeRates() throws AmazingKartException {
 		RateStore.getInstance().setRates(
-				 new HttpJsonResponseFetcher<ExchangeRates>().fetchJSONResponse(Constants.EXCHANGE_RATE_URL).get(0).getRates());
+				 new HttpJsonResponseFetcher<ExchangeRates>().fetchJSONResponseIntoMap(Constants.EXCHANGE_RATE_URL));
 	}
 
 }

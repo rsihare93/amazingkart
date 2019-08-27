@@ -1,5 +1,8 @@
 package com.amazingkart.promotions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.amazingkart.AmazingKartException;
 import com.amazingkart.pojo.Discount;
 import com.amazingkart.pojo.Product;
@@ -15,5 +18,13 @@ public abstract class PromotionSet {
 		
 	}
 	
-	
+	public List<Product> applyPromotion(List<Product> products) throws AmazingKartException {
+		List<Product> toRtturn = new ArrayList<Product>();
+		for (Product product : products) {
+			Product t = new Product(product);
+			this.applyPromotion(t);
+			toRtturn.add(t);
+		}
+		return toRtturn;
+	}
 }
