@@ -15,7 +15,6 @@ import com.amazingkart.util.JSONConverter;
 public class API {
 
 	private static final String OUTPUT_JSON_FILE_NAME = "output.json";
-	private static final String TARGET = "target";
 
 	/*
 	 * This is main method, As a part of main method we call following steps 1)
@@ -39,7 +38,7 @@ public class API {
 	private static void writeToOutputFile(List<Product> applyPromotion) throws AmazingKartException {
 		try {
 			new JSONConverter<Product>().writeToJsonFile(
-					Paths.get(TARGET, OUTPUT_JSON_FILE_NAME).toUri().toURL().getFile(), applyPromotion);
+					Paths.get(OUTPUT_JSON_FILE_NAME).toUri().toURL().getFile(), applyPromotion);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
